@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.library.entity.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+User user = (User) session.getAttribute("user");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -46,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="layui-form-item">
             <label class="layui-form-label">ISBN</label>
             <div class="layui-input-block">
-                <input name="title" class="layui-input" type="text" placeholder="请输入ISBN" autocomplete="off">
+                <input name="isbn" class="layui-input" type="text" placeholder="请输入ISBN" autocomplete="off">
             </div>
         </div>
 
@@ -54,20 +56,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <label class="layui-form-label">书籍种类</label>
             <div class="layui-input-inline">
                 <select name="quiz1">
-          <option value="">请选择大类</option>
-          <option value="A" selected="">大类1</option>
-          <option value="B">大类2</option>
-          <option value="C">大类3</option>
-        </select>
+          			<option value="">请选择大类</option>
+          			<option value="A" selected="">大类1</option>
+          			<option value="B">大类2</option>
+          			<option value="C">大类3</option>
+        		</select>
             </div>
             <div class="layui-input-inline">
                 <select name="quiz2">
-          <option value="">请选择小类</option>
-          <option value="1">小类1</option>
-          <option value="2">小类2</option>
-          <option value="3">小类3</option>
-          <option value="4">小类4</option>
-        </select>
+          			<option value="">请选择小类</option>
+          			<option value="1">小类1</option>
+          			<option value="2">小类2</option>
+          			<option value="3">小类3</option>
+          			<option value="4">小类4</option>
+        		</select>
             </div>
         </div>
 

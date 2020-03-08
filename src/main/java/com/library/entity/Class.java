@@ -6,6 +6,7 @@ public class Class {
 	private String name;
 	private String symbol;
 	private int id_category;
+	private int count;
 
 	public int getId() {
 		return id;
@@ -30,6 +31,12 @@ public class Class {
 	}
 	public void setId_category(int id_category) {
 		this.id_category = id_category;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }
