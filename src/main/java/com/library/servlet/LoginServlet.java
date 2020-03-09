@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.*;
 
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 

@@ -11,9 +11,9 @@ import com.library.entity.Class;
 
 public class ClassDao {
 
-	public List<Class> getAllClass() throws SQLException {
+	public List<Class> getAllClass(int id) throws SQLException {
         List<Class> list = new ArrayList<Class>();
-        String sql = "select * from class";
+        String sql = "select * from class where id_category = " + id;
         Connection conn = DbUtil.getCon();        
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class ClassDao {
     }
 	
 	public Class getInfo(int id) throws SQLException {
-        String sql = "select * from class where id = '" + id + "'";
+        String sql = "select * from class where id = " + id;
         Connection conn = DbUtil.getCon();
         Class Class = new Class();
         try {
@@ -100,7 +100,7 @@ public class ClassDao {
     }
 	
 	public boolean delClass(int id) throws SQLException {
-    	String sql = "delete from class where id = '" + id + "'";
+    	String sql = "delete from class where id = " + id;
     	Connection conn = DbUtil.getCon();
     	try {
     		PreparedStatement pst = conn.prepareStatement(sql);
