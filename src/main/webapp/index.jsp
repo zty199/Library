@@ -2,5 +2,5 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-response.sendRedirect("/Forum/jsp/index.jsp");
 %>
+<jsp:forward page="jsp/index.jsp"></jsp:forward>

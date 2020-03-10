@@ -2,7 +2,7 @@ layui.use('form', function() {
 
     //XMLHttpRequest组件
     var xhr;
-
+    //创建XMLHttpRequest对象方法
     function createXmlHttpRequest() {
         if (window.ActiveXObject) {
             return new ActiveXObject("Microsoft.XMLHTTP");
@@ -17,7 +17,12 @@ layui.use('form', function() {
     //处理category下拉框事件
     form.on('select(category)', function(data) {
         var id = data.value;
-        if (id > 0) {
+        if (id == 0) {
+        	//根据返回的字符串为新创建的select节点添加option节点
+        	$('#class').html('<option value="" selected="">请选择小类</option>');
+        	//刷新Layui-form渲染
+        	form.render();
+        } else {
             //请求字符串,把区域的id作为页面参数传到后台CascadeServlet
             var url = "servlet/CascadeServlet?id=" + id;
             //创建XMLHttpRequest组件
@@ -35,16 +40,13 @@ layui.use('form', function() {
                     //得到完成请求后返回的字串符
                     var str = xhr.responseText;
                     //根据返回的字符串为新创建的select节点添加option节点
-                    $('#class').html('<option value="0" selected="">请选择小类</option>');
+                    $('#class').html('<option value="" selected="">请选择小类</option>');
                     var arr1 = str.split(",");
                     for (var i = 0; i < arr1.length; i++) {
                         var arr2 = arr1[i].split("=");
                         var value = arr2[0];
                         var innerHTML = arr2[1];
-                        $('#class').append($("<option/>", {
-                            value: value,
-                            text: innerHTML
-                        }));
+                        $('#class').append("<option value=" + value + ">" + innerHTML + "</option>");
                     }
                     //刷新Layui-form渲染
                     form.render();

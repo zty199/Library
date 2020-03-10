@@ -9,6 +9,11 @@
     <servlet-name>CascadeServlet</servlet-name>
     <servlet-class>com.library.servlet.CascadeServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AddbookServlet</servlet-name>
+    <servlet-class>com.library.servlet.AddbookServlet</servlet-class>
+  </servlet>
+
 
 
   <servlet-mapping>
@@ -18,6 +23,10 @@
   <servlet-mapping>
     <servlet-name>CascadeServlet</servlet-name>
     <url-pattern>/servlet/CascadeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddbookServlet</servlet-name>
+    <url-pattern>/servlet/AddbookServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

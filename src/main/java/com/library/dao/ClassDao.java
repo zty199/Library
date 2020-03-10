@@ -77,17 +77,18 @@ public class ClassDao {
     		conn.close();
     		return false;
     	}
-    }
+    }*/
 	
 	public boolean modifyClass(Class Class) throws SQLException {
-    	String sql = "update Class set name = ?, symbol = ?, id_category = ? where id = ?";
+    	String sql = "update Class set name = ?, symbol = ?, id_category = ?, count = ? where id = ?";
     	Connection conn = DbUtil.getCon();
     	try {			
     		PreparedStatement pst = conn.prepareStatement(sql);
-    		pst.setString(1, class.getName());
-    		pst.setString(2, class.getSymbol());
-    		pst.setInt(3, class.getId_category());
-    		pst.setInt(4, class.getId());
+    		pst.setString(1, Class.getName());
+    		pst.setString(2, Class.getSymbol());
+    		pst.setInt(3, Class.getId_category());
+    		pst.setInt(4, Class.getCount());
+    		pst.setInt(5, Class.getId());
     		int flag = pst.executeUpdate();
     		pst.close();
     		conn.close();
@@ -99,7 +100,7 @@ public class ClassDao {
     	}
     }
 	
-	public boolean delClass(int id) throws SQLException {
+	/*public boolean delClass(int id) throws SQLException {
     	String sql = "delete from class where id = " + id;
     	Connection conn = DbUtil.getCon();
     	try {

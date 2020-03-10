@@ -21,18 +21,18 @@ public class BookDao {
             ResultSet rs = pst.executeQuery();
             while(rs.next())
             {
-            	Book Book = new Book();
-            	Book.setId(rs.getInt("id"));
-            	Book.setISBN(rs.getString("ISBN"));
-            	Book.setIndex(rs.getString("index"));
-            	Book.setName(rs.getString("name"));
-            	Book.setWriter(rs.getString("writer"));
-            	Book.setDate(rs.getTimestamp("date"));
-            	Book.setId(rs.getInt("id_region"));
-            	Book.setId(rs.getInt("id_publisher"));
-            	Book.setId(rs.getInt("id_category"));
-            	Book.setId(rs.getInt("id_class"));
-                list.add(Book);
+            	Book book = new Book();
+            	book.setId(rs.getInt("id"));
+            	book.setISBN(rs.getString("ISBN"));
+            	book.setReference(rs.getString("reference"));
+            	book.setName(rs.getString("name"));
+            	book.setWriter(rs.getString("writer"));
+            	book.setDate(rs.getTimestamp("date"));
+            	book.setId(rs.getInt("id_region"));
+            	book.setId(rs.getInt("id_publisher"));
+            	book.setId(rs.getInt("id_category"));
+            	book.setId(rs.getInt("id_class"));
+                list.add(book);
             }
             rs.close();
         	pst.close();
@@ -44,23 +44,23 @@ public class BookDao {
     }
 	
 	public Book getInfo(int id) throws SQLException {
-        String sql = "select * from book where id = '" + id + "'";
+        String sql = "select * from book where id = " + id;
         Connection conn = DbUtil.getCon();
-        Book Book = new Book();
+        Book book = new Book();
         try {
         	PreparedStatement pst = conn.prepareStatement(sql);
         	ResultSet rs = pst.executeQuery();
         	while(rs.next()) {
-        		Book.setId(rs.getInt("id"));
-            	Book.setISBN(rs.getString("ISBN"));
-            	Book.setIndex(rs.getString("index"));
-            	Book.setName(rs.getString("name"));
-            	Book.setWriter(rs.getString("writer"));
-            	Book.setDate(rs.getTimestamp("date"));
-            	Book.setId(rs.getInt("id_region"));
-            	Book.setId(rs.getInt("id_publisher"));
-            	Book.setId(rs.getInt("id_category"));
-            	Book.setId(rs.getInt("id_class"));
+        		book.setId(rs.getInt("id"));
+        		book.setISBN(rs.getString("ISBN"));
+        		book.setReference(rs.getString("reference"));
+        		book.setName(rs.getString("name"));
+        		book.setWriter(rs.getString("writer"));
+        		book.setDate(rs.getTimestamp("date"));
+        		book.setId(rs.getInt("id_region"));
+        		book.setId(rs.getInt("id_publisher"));
+        		book.setId(rs.getInt("id_category"));
+        		book.setId(rs.getInt("id_class"));
         	}
         	rs.close();
         	pst.close();
@@ -68,17 +68,49 @@ public class BookDao {
     		e.printStackTrace();
     	}
         conn.close();
-        return Book;
+        return book;
+    }
+	
+	public boolean isListed(String isbn) throws SQLException {
+        String sql = "select * from book where ISBN = '" + isbn +"'";
+        Connection conn = DbUtil.getCon();
+        Book book = new Book();
+        try {
+        	PreparedStatement pst = conn.prepareStatement(sql);
+        	ResultSet rs = pst.executeQuery();
+        	while(rs.next()) {
+        		book.setId(rs.getInt("id"));
+        		book.setISBN(rs.getString("ISBN"));
+        		book.setReference(rs.getString("reference"));
+        		book.setName(rs.getString("name"));
+        		book.setWriter(rs.getString("writer"));
+        		book.setDate(rs.getTimestamp("date"));
+        		book.setId(rs.getInt("id_region"));
+        		book.setId(rs.getInt("id_publisher"));
+        		book.setId(rs.getInt("id_category"));
+        		book.setId(rs.getInt("id_class"));
+        	}
+        	rs.close();
+        	pst.close();
+        } catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+        conn.close();
+        if(book.getISBN() != null && book.getISBN().equals(isbn)) {
+        	return true;
+    	} else {
+    		return false;
+    	}
     }
 	
 	public boolean addBook(Book book) throws SQLException {
 	    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    	String sql = "insert into book(ISBN, index, name, writer, date, id_region, id_publisher, id_category, id_class) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    	String sql = "insert into book(ISBN, reference, name, writer, date, id_region, id_publisher, id_category, id_class) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     	Connection conn = DbUtil.getCon();
     	try {			
     		PreparedStatement pst = conn.prepareStatement(sql);
     		pst.setString(1, book.getISBN());
-    		pst.setString(2, book.getIndex());
+    		pst.setString(2, book.getReference());
     		pst.setString(3, book.getName());
     		pst.setString(4, book.getWriter());
     		pst.setTimestamp(5, timestamp);
@@ -98,12 +130,12 @@ public class BookDao {
     }
 	
 	/*public boolean modifyBook(Book book) throws SQLException {
-    	String sql = "update book set ISBN = ?, index = ?, name = ?, writer = ?, id_region = ?, id_publisher = ?, id_category = ?, id_class = ? where id = ?";
+    	String sql = "update book set ISBN = ?, reference = ?, name = ?, writer = ?, id_region = ?, id_publisher = ?, id_category = ?, id_class = ? where id = ?";
     	Connection conn = DbUtil.getCon();
     	try {			
     		PreparedStatement pst = conn.prepareStatement(sql);
     		pst.setString(1, book.getISBN());
-    		pst.setString(2, book.getIndex());
+    		pst.setString(2, book.getReference());
     		pst.setString(3, book.getName());
     		pst.setString(4, book.getWriter());
     		pst.setInt(5, book.getId_region());

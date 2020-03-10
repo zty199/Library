@@ -6,7 +6,7 @@ public class Book {
 
 	private int id;
 	private String ISBN;
-	private String index;
+	private String reference;
 	private String name;
 	private String writer;
 	private Timestamp date;
@@ -27,11 +27,11 @@ public class Book {
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
-	public String getIndex() {
-		return index;
+	public String getReference() {
+		return reference;
 	}
-	public void setIndex(String index) {
-		this.index = index;
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 	public String getName() {
 		return name;

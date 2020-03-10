@@ -36,7 +36,7 @@ public class CategoryDao {
     }
 	
 	public Category getInfo(int id) throws SQLException {
-        String sql = "select * from category where id = '" + id + "'";
+        String sql = "select * from category where id = " + id;
         Connection conn = DbUtil.getCon();
         Category Category = new Category();
         try {

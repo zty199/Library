@@ -20,10 +20,12 @@ public class PublisherDao {
             ResultSet rs = pst.executeQuery();
             while(rs.next())
             {
-            	Publisher Publisher = new Publisher();
-            	Publisher.setId(rs.getInt("id"));
-            	Publisher.setName(rs.getString("name"));
-                list.add(Publisher);
+            	Publisher publisher = new Publisher();
+            	publisher.setId(rs.getInt("id"));
+            	publisher.setReference(rs.getString("reference"));
+            	publisher.setName(rs.getString("name"));
+            	publisher.setId_region(rs.getInt("id_region"));
+                list.add(publisher);
             }
             rs.close();
         	pst.close();
@@ -35,15 +37,17 @@ public class PublisherDao {
     }
 	
 	public Publisher getInfo(int id) throws SQLException {
-        String sql = "select * from publisher where id = '" + id + "'";
+        String sql = "select * from publisher where id = " + id;
         Connection conn = DbUtil.getCon();
-        Publisher Publisher = new Publisher();
+        Publisher publisher = new Publisher();
         try {
         	PreparedStatement pst = conn.prepareStatement(sql);
         	ResultSet rs = pst.executeQuery();
         	while(rs.next()) {
-        		Publisher.setId(rs.getInt("id"));
-            	Publisher.setName(rs.getString("name"));
+        		publisher.setId(rs.getInt("id"));
+        		publisher.setReference(rs.getString("reference"));
+        		publisher.setName(rs.getString("name"));
+            	publisher.setId_region(rs.getInt("id_region"));
         	}
         	rs.close();
         	pst.close();
@@ -51,7 +55,55 @@ public class PublisherDao {
     		e.printStackTrace();
     	}
         conn.close();
-        return Publisher;
+        return publisher;
+    }
+	
+	public Publisher getInfo(String reference) throws SQLException {
+        String sql = "select * from publisher where reference = '"  + reference + "'";
+        Connection conn = DbUtil.getCon();
+        Publisher publisher = new Publisher();
+        try {
+        	PreparedStatement pst = conn.prepareStatement(sql);
+        	ResultSet rs = pst.executeQuery();
+        	while(rs.next()) {
+        		publisher.setId(rs.getInt("id"));
+        		publisher.setReference(rs.getString("reference"));
+        		publisher.setName(rs.getString("name"));
+            	publisher.setId_region(rs.getInt("id_region"));
+        	}
+        	rs.close();
+        	pst.close();
+        } catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+        conn.close();
+        return publisher;
+    }
+	
+	public boolean isListed(String reference) throws SQLException {
+        String sql = "select * from publisher where reference = '" + reference + "'";
+        Connection conn = DbUtil.getCon();
+        Publisher publisher = new Publisher();
+        try {
+        	PreparedStatement pst = conn.prepareStatement(sql);
+        	ResultSet rs = pst.executeQuery();
+        	while(rs.next()) {
+        		publisher.setId(rs.getInt("id"));
+        		publisher.setReference(rs.getString("reference"));
+        		publisher.setName(rs.getString("name"));
+            	publisher.setId_region(rs.getInt("id_region"));
+        	}
+        	rs.close();
+        	pst.close();
+        } catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+        conn.close();
+        if(publisher.getReference() != null && publisher.getReference().equals(reference)) {
+        	return true;
+    	} else {
+    		return false;
+    	}
     }
 	
 	/*public boolean addPublisher(Publisher publisher) throws SQLException {
