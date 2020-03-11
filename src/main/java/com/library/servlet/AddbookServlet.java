@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.*;
 import com.library.entity.Class;
+import com.library.interpreter.*;
 
 public class AddbookServlet extends HttpServlet {
 
@@ -26,6 +27,8 @@ public class AddbookServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
         String isbn = request.getParameter("isbn");
+        String region = new Information().getRegion(isbn).interpret();
+        String publisher = new Information().getPublisher(isbn).interpret();
         BookDao dao = new BookDao();
         try {
         	if(dao.isListed(isbn)) {
@@ -34,9 +37,6 @@ public class AddbookServlet extends HttpServlet {
         		out.close();
         		return;
         	}
-        	String[] array = isbn.split("-");
-        	String region = array[0] + array[1];
-        	String publisher = array[0] + array[1] + array[2];
         	RegionDao dao1 = new RegionDao();
         	PublisherDao dao2 = new PublisherDao();
         	int id_region = 0;

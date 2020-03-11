@@ -20,11 +20,11 @@ public class CategoryDao {
             ResultSet rs = pst.executeQuery();
             while(rs.next())
             {
-            	Category Category = new Category();
-            	Category.setId(rs.getInt("id"));
-            	Category.setName(rs.getString("name"));
-            	Category.setSymbol(rs.getString("symbol"));
-                list.add(Category);
+            	Category category = new Category();
+            	category.setId(rs.getInt("id"));
+            	category.setName(rs.getString("name"));
+            	category.setSymbol(rs.getString("symbol"));
+                list.add(category);
             }
             rs.close();
         	pst.close();
@@ -38,14 +38,14 @@ public class CategoryDao {
 	public Category getInfo(int id) throws SQLException {
         String sql = "select * from category where id = " + id;
         Connection conn = DbUtil.getCon();
-        Category Category = new Category();
+        Category category = new Category();
         try {
         	PreparedStatement pst = conn.prepareStatement(sql);
         	ResultSet rs = pst.executeQuery();
         	while(rs.next()) {
-        		Category.setId(rs.getInt("id"));
-            	Category.setName(rs.getString("name"));
-            	Category.setSymbol(rs.getString("symbol"));
+        		category.setId(rs.getInt("id"));
+            	category.setName(rs.getString("name"));
+            	category.setSymbol(rs.getString("symbol"));
         	}
         	rs.close();
         	pst.close();
@@ -53,7 +53,7 @@ public class CategoryDao {
     		e.printStackTrace();
     	}
         conn.close();
-        return Category;
+        return category;
     }
 	
 	/*public boolean addCategory(Category category) throws SQLException {

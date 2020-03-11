@@ -40,6 +40,7 @@ public class CascadeServlet extends HttpServlet {
 	        out.print(str.toString());
 	        out.flush();
 	        out.close();
+	        return;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -11,7 +11,6 @@ public class TerminalExpression implements Expression {
 	@Override
 	public String interpret() {
 		// TODO Auto-generated method stub
-		System.out.println(context);
 		return context;
 	}
 

@@ -48,7 +48,7 @@ User user = (User) session.getAttribute("user");
         <div class="layui-form-item">
             <label class="layui-form-label">ISBN</label>
             <div class="layui-input-block">
-                <input name="isbn" class="layui-input" type="text" placeholder="请输入ISBN" autocomplete="off" lay-verify="isbn">
+                <input id="isbn" name="isbn" class="layui-input" type="text" placeholder="请输入ISBN" autocomplete="off" lay-verify="isbn">
             </div>
         </div>
 
@@ -82,13 +82,13 @@ User user = (User) session.getAttribute("user");
     </form>
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script src="layui/layui.all.js" charset="utf-8"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/cascade.js" charset="utf-8"></script>
     <script>
-    	layui.use('form', function() {
-    		var form = layui.form;
-  			
+    	layui.use(['form', 'layer'], function() {
+    		var form = layui.form, 
+    			layer = layui.layer;
+    		
   			//自定义验证规则
     		form.verify({
     			name: function(value){
@@ -106,6 +106,17 @@ User user = (User) session.getAttribute("user");
       				,'请检查输入的ISBN格式！'
     			]
   			});
+  			
+    		//鼠标悬停提示特效
+    		$("#isbn").hover(function() {
+    			layer.tips('注意ISBN格式，例如：978-7-02-000001-1', '#isbn', {
+    				tips:[1, '#5FB878'],
+    				time: 5000
+    			});
+    		}, function() {
+    			var index = layer.tips();
+    			layer.close(index);
+    		});
     	});
     </script>
 

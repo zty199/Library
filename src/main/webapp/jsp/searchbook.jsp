@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.library.entity.*, com.library.dao.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -28,21 +29,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>查询图书</legend>
     </fieldset>
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="servlet/SearchbookServlet" method="post">
         <div class="layui-form-item">
-            <label class="layui-form-label">索书号/ISBN</label>
+            <label class="layui-form-label">搜索</label>
             <div class="layui-input-block">
-                <input name="title" class="layui-input" type="text" placeholder="请输入ISBN/索书号" autocomplete="off">
+                <input id="content" name="content" class="layui-input" type="text" placeholder="请输入索书号/ISBN/书名/作者" autocomplete="off" lay-verify="content">
             </div>
         </div>
         <br>
         <div class="layui-form-item">
-            <button class="layui-btn" lay-filter="demo2" lay-submit="">查询</button>
+            <button type="submit" class="layui-btn" lay-submit="">查询</button>
         </div>
     </form>
 
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-        <legend>查询的书的信息</legend>
+        <legend>书籍相关信息</legend>
     </fieldset>
 
     <div class="layui-form">
@@ -66,95 +67,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
             </thead>
             <tbody>
+            <%
+                if(session.getAttribute("list") != null) {
+                	List<Book> list = (List<Book>) session.getAttribute("list");
+                	for(int i = 0; i < list.size(); i++) {
+                		Book book = list.get(i);
+                		RegionDao dao = new RegionDao();
+                		PublisherDao dao1 = new PublisherDao();
+                		CategoryDao dao2 = new CategoryDao();
+                		ClassDao dao3 = new ClassDao();
+                		String region = "";
+                		String publisher = "";
+                		if(book.getId_region() != 0) {
+                			region = dao.getInfo(book.getId_region()).getName();
+                		} else {
+                			region = "未知国家地区";
+                		}
+                		if(book.getId_publisher() != 0) {
+                			publisher = dao1.getInfo(book.getId_publisher()).getName();
+                		} else {
+                			publisher = "未知出版社";
+                		}
+                		String category = dao2.getInfo(book.getId_category()).getName();
+                		String Class = dao3.getInfo(book.getId_class()).getName();
+            %>
                 <tr>
-                    <td>索书号14</td>
-                    <td>书的种类</td>
-                    <td>书的名字</td>
-                    <td>ISBN13</td>
-                    <td>作者A</td>
-                    <td>出版社A</td>
-                    <td>某国</td>
-                    <td>某时间</td>
+                    <td><%=book.getReference()%></td>
+                    <td><%=category+"-"+Class%></td>
+                    <td><%=book.getName()%></td>
+                    <td><%=book.getISBN()%></td>
+                    <td><%=book.getWriter()%></td>
+                    <td><%=publisher%></td>
+                    <td><%=region%></td>
+                    <td><%=book.getDate()%></td>
                 </tr>
-
+            <%
+                	}
+                }
+            	session.removeAttribute("list");
+            %>
             </tbody>
         </table>
     </div>
 
-    <script src="js/layui.all.js" charset="utf-8"></script>
-    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script>
-        layui.use(['form', 'layedit', 'laydate'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
-
-            //日期
-            laydate.render({
-                elem: '#date'
-            });
-            laydate.render({
-                elem: '#date1'
-            });
-
-            //创建一个编辑器
-            var editIndex = layedit.build('LAY_demo_editor');
-
+        layui.use(['form', 'layer'], function() {
+            var form = layui.form, 
+            	layer = layui.layer;
+            
             //自定义验证规则
             form.verify({
-                title: function(value) {
-                    if (value.length < 5) {
-                        return '标题至少得5个字符啊';
+            	content: function(value) {
+                    if (value.length == 0) {
+                        return '查询内容不能为空！';
                     }
-                },
-                pass: [
-                    /^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
-                ],
-                content: function(value) {
-                    layedit.sync(editIndex);
                 }
             });
-
-            //监听指定开关
-            form.on('switch(switchTest)', function(data) {
-                layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                    offset: '6px'
-                });
-                layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-            });
-
-            //监听提交
-            form.on('submit(demo1)', function(data) {
-                layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                })
-                return false;
-            });
-
-            //表单赋值
-            layui.$('#LAY-component-form-setval').on('click', function() {
-                form.val('example', {
-                    "username": "贤心" // "name": "value"
-                        ,
-                    "password": "123456",
-                    "interest": 1,
-                    "like[write]": true //复选框选中状态
-                        ,
-                    "close": true //开关状态
-                        ,
-                    "sex": "女",
-                    "desc": "我爱 layui"
-                });
-            });
-
-            //表单取值
-            layui.$('#LAY-component-form-getval').on('click', function() {
-                var data = form.val('example');
-                alert(JSON.stringify(data));
-            });
-
+            
+          	//鼠标悬停提示特效
+    		$("#content").hover(function() {
+    			layer.tips('注意ISBN格式，例如：978-7-02-000001-1', '#content', {
+    				tips:[3, '#5FB878'],
+    				time: 5000
+    			});
+    		}, function() {
+    			var index = layer.tips();
+    			layer.close(index);
+    		});
         });
     </script>
+
   </body>
 </html>

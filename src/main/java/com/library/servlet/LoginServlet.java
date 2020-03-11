@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
         User user = new User();
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
@@ -31,11 +32,12 @@ public class LoginServlet extends HttpServlet {
 			if(dao.isValid(user.getUsername(), user.getPassword())) {
 				request.getSession().setAttribute("user", user);
 				response.sendRedirect("../jsp/index.jsp");
+				return;
 			} else {
-				PrintWriter out = response.getWriter();
 				out.print("<script>alert('用户名或密码错误！'); window.location='../jsp/login.jsp'</script>");
 				out.flush();
 				out.close();
+				return;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
