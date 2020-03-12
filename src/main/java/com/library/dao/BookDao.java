@@ -159,7 +159,7 @@ public class BookDao {
     	}
     }
 	
-	/*public boolean modifyBook(Book book) throws SQLException {
+	public boolean modifyBook(Book book) throws SQLException {
     	String sql = "update book set ISBN = ?, reference = ?, name = ?, writer = ?, id_region = ?, id_publisher = ?, id_category = ?, id_class = ? where id = ?";
     	Connection conn = DbUtil.getCon();
     	try {			
@@ -198,5 +198,5 @@ public class BookDao {
     		conn.close();
     		return false;
     	}
-    }*/
+    }
 }

@@ -11,9 +11,9 @@ import com.library.entity.*;
 
 public class PublisherDao {
 
-	public List<Publisher> getAllPublisher() throws SQLException {
+	public List<Publisher> getAllPublisher(int id) throws SQLException {
         List<Publisher> list = new ArrayList<Publisher>();
-        String sql = "select * from publisher";
+        String sql = "select * from publisher where id_region = " + id;
         Connection conn = DbUtil.getCon();        
         try {
             PreparedStatement pst = conn.prepareStatement(sql);

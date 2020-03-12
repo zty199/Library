@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.Class;
 
-public class CascadeServlet extends HttpServlet {
+public class CascadeCategoryServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 

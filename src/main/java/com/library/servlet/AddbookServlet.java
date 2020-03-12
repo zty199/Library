@@ -82,7 +82,7 @@ public class AddbookServlet extends HttpServlet {
 				out.close();
 				return;
 			} else {
-				out.print("<script>alert('添加书籍失败,请检查数据库！'); window.location='../jsp/addbook.jsp'</script>");
+				out.print("<script>alert('添加书籍失败,请检查！'); window.location='../jsp/addbook.jsp'</script>");
 				out.flush();
 				out.close();
 				return;
