@@ -29,7 +29,7 @@ User user = (User) session.getAttribute("user");
   <body>
   <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">Whatever小组</div>
+            <div class="layui-logo">图书管理系统</div>
             
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="jsp/searchbook.jsp">图书查询</a></li>
@@ -43,7 +43,6 @@ User user = (User) session.getAttribute("user");
                 %>
             </ul>
             <ul class="layui-nav layui-layout-right">
-            	<li class="layui-nav-item">欢迎使用图书查询管理系统！</li>
             <%
             if(user == null) {
             %>
@@ -102,6 +101,10 @@ User user = (User) session.getAttribute("user");
         <button type="button" class="layui-btn layui-btn-primary" onclick="window.location='/Library/jsp/managebook.jsp';"><i class="layui-icon layui-icon-return"></i>返回</button>
       </div>
     </form>
+      <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © Whatever组 Interpreters风格
+  </div>
     </div>
     
     <script src="layui/layui.all.js" charset="utf-8"></script>

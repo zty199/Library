@@ -32,7 +32,7 @@ Book book = dao.getInfo(id);
   <body>
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">Whatever小组</div>
+            <div class="layui-logo">图书管理系统</div>
             
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="jsp/searchbook.jsp">图书查询</a></li>
@@ -46,7 +46,6 @@ Book book = dao.getInfo(id);
                 %>
             </ul>
             <ul class="layui-nav layui-layout-right">
-            	<li class="layui-nav-item">欢迎使用图书查询管理系统！</li>
             <%
             if(user == null) {
             %>
@@ -71,7 +70,7 @@ Book book = dao.getInfo(id);
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend>图书信息修改</legend>
         </fieldset>
-        
+        <div  style="padding:0px 30px">
         <form class="layui-form layui-form-pane" action="servlet/ModifybookServlet?id=<%=id%>" method="post">
             <div class="layui-form-item">
                 <label class="layui-form-label">书名</label>
@@ -179,7 +178,11 @@ Book book = dao.getInfo(id);
     		</div>
     	</form>
     </div>
-    
+      <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © Whatever组 Interpreters风格
+  </div>
+    </div>
     <script src="layui/layui.all.js" charset="utf-8"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/cascadecategory.js" charset="utf-8"></script>

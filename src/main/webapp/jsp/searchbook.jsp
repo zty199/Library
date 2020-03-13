@@ -29,7 +29,7 @@ User user = (User) session.getAttribute("user");
   <body>
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">Whatever小组</div>
+            <div class="layui-logo">图书管理系统</div>
             
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="jsp/searchbook.jsp">图书查询</a></li>
@@ -43,7 +43,6 @@ User user = (User) session.getAttribute("user");
                 %>
             </ul>
             <ul class="layui-nav layui-layout-right">
-            	<li class="layui-nav-item">欢迎使用图书查询管理系统！</li>
             <%
             if(user == null) {
             %>
@@ -68,7 +67,7 @@ User user = (User) session.getAttribute("user");
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend>图书查询</legend>
         </fieldset>
-        
+            <div  style="padding:0px 30px">
         <div class="layui-form">
         <form class="layui-form layui-form-pane" action="servlet/SearchbookServlet" method="post">
             <div class="layui-form-item">
@@ -78,16 +77,16 @@ User user = (User) session.getAttribute("user");
                 </div>
             </div>
             <br>
-            <div class="layui-form-item">
-                <button type="submit" class="layui-btn" lay-submit=""><i class="layui-icon layui-icon-search"></i>搜索</button>
+            <div class="layui-form-item layui-col-md-offset5">
+                <button type="submit" class="layui-btn layui-col-md3" lay-submit=""><i class="layui-icon layui-icon-search"></i>搜索</button>
             </div>
         </form>
         </div>
-
+</div>
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend>书籍相关信息</legend>
         </fieldset>
-
+    <div  style="padding:0px 30px">
         <div class="layui-form">
             <table class="layui-table">
                 <colgroup>
@@ -156,7 +155,11 @@ User user = (User) session.getAttribute("user");
             </table>
         </div>
     </div>
-
+    <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © Whatever组 Interpreters风格
+  </div>
+</div>
     <script src="layui/layui.all.js" charset="utf-8"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script>
