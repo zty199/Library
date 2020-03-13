@@ -8,7 +8,8 @@ User user = (User) session.getAttribute("user");
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
+
+<head>
     <base href="<%=basePath%>">
 
     <title>图书查询 - 图书查询管理系统</title>
@@ -18,19 +19,19 @@ User user = (User) session.getAttribute("user");
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
 
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">图书管理系统</div>
-            
+            <div class="layui-logo">图书查询管理系统</div>
+
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="jsp/searchbook.jsp">图书查询</a></li>
                 <%
@@ -50,44 +51,44 @@ User user = (User) session.getAttribute("user");
             <%
             } else {
             %>
-            	<li class="layui-nav-item">
-            		<a href="jsp/admin.jsp">欢迎您，管理员&nbsp;<%=user.getUsername()%></a>
-            		<dl class="layui-nav-child">
-        				<dd class="layui-this">
-        					<a href="jsp/logout.jsp"><i class="layui-icon layui-icon-logout"></i>&nbsp;退出登录</a>
-        				</dd>
-      				</dl>
-            	</li>
+                <li class="layui-nav-item">
+                    <a href="jsp/admin.jsp">欢迎您，管理员&nbsp;<%=user.getUsername()%></a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-this">
+                            <a href="jsp/logout.jsp"><i class="layui-icon layui-icon-logout"></i>&nbsp;退出登录</a>
+                        </dd>
+                    </dl>
+                </li>
             <%
             }
             %>
             </ul>
         </div>
-        
+
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend>图书查询</legend>
         </fieldset>
-            <div  style="padding:0px 30px">
-        <div class="layui-form">
-        <form class="layui-form layui-form-pane" action="servlet/SearchbookServlet" method="post">
-            <div class="layui-form-item">
-                <label class="layui-form-label">搜索</label>
-                <div class="layui-input-block">
-                    <input id="content" name="content" class="layui-input" type="text" placeholder="请输入索书号/ISBN/书名/作者" autocomplete="off" lay-verify="content">
+
+        <div class="layui-form" style="padding:0px 30px">
+            <form class="layui-form layui-form-pane" action="servlet/SearchbookServlet" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">搜索</label>
+                    <div class="layui-input-block">
+                        <input id="content" name="content" class="layui-input" type="text" placeholder="请输入索书号/ISBN/书名/作者" autocomplete="off" lay-verify="content">
+                    </div>
                 </div>
-            </div>
-            <br>
-            <div class="layui-form-item layui-col-md-offset5">
-                <button type="submit" class="layui-btn layui-col-md3" lay-submit=""><i class="layui-icon layui-icon-search"></i>搜索</button>
-            </div>
-        </form>
+                <br>
+                <div class="layui-form-item layui-col-md-offset5">
+                    <button type="submit" class="layui-btn layui-col-md3" lay-submit=""><i class="layui-icon layui-icon-search"></i>搜索</button>
+                </div>
+            </form>
         </div>
-</div>
+
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend>书籍相关信息</legend>
         </fieldset>
-    <div  style="padding:0px 30px">
-        <div class="layui-form">
+
+        <div style="padding:0px 30px">
             <table class="layui-table">
                 <colgroup>
                     <col width="150">
@@ -154,12 +155,13 @@ User user = (User) session.getAttribute("user");
                 </tbody>
             </table>
         </div>
+
+        <div class="layui-footer" style="text-align: center;">
+            <!-- 底部固定区域 -->
+            © Whatever组 Interpreters风格
+        </div>
     </div>
-    <div class="layui-footer">
-    <!-- 底部固定区域 -->
-    © Whatever组 Interpreters风格
-  </div>
-</div>
+
     <script src="layui/layui.all.js" charset="utf-8"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script>
@@ -189,5 +191,6 @@ User user = (User) session.getAttribute("user");
         });
     </script>
 
-  </body>
+</body>
+
 </html>
