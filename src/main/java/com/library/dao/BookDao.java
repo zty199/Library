@@ -22,17 +22,17 @@ public class BookDao {
             while(rs.next())
             {
             	Book book = new Book();
-            	book.setId(rs.getInt("id"));
-            	book.setISBN(rs.getString("ISBN"));
-            	book.setReference(rs.getString("reference"));
-            	book.setName(rs.getString("name"));
-            	book.setWriter(rs.getString("writer"));
-            	book.setDate(rs.getTimestamp("date"));
-            	book.setId(rs.getInt("id_region"));
-            	book.setId(rs.getInt("id_publisher"));
-            	book.setId(rs.getInt("id_category"));
-            	book.setId(rs.getInt("id_class"));
-                list.add(book);
+        		book.setId(rs.getInt("id"));
+        		book.setISBN(rs.getString("ISBN"));
+        		book.setReference(rs.getString("reference"));
+        		book.setName(rs.getString("name"));
+        		book.setWriter(rs.getString("writer"));
+        		book.setDate(rs.getTimestamp("date"));
+        		book.setId_region(rs.getInt("id_region"));
+        		book.setId_publisher(rs.getInt("id_publisher"));
+        		book.setId_category(rs.getInt("id_category"));
+        		book.setId_class(rs.getInt("id_class"));
+        		list.add(book);
             }
             rs.close();
         	pst.close();
@@ -46,6 +46,36 @@ public class BookDao {
 	public List<Book> getInfo(String temp) throws SQLException {
 		List<Book> list = new ArrayList<Book>();
         String sql = "select * from book where ISBN = '" + temp + "' or name = '" + temp + "' or reference = '" + temp + "' or writer = '" + temp + "'";
+        Connection conn = DbUtil.getCon();
+        try {
+        	PreparedStatement pst = conn.prepareStatement(sql);
+        	ResultSet rs = pst.executeQuery();
+        	while(rs.next()) {
+        		Book book = new Book();
+        		book.setId(rs.getInt("id"));
+        		book.setISBN(rs.getString("ISBN"));
+        		book.setReference(rs.getString("reference"));
+        		book.setName(rs.getString("name"));
+        		book.setWriter(rs.getString("writer"));
+        		book.setDate(rs.getTimestamp("date"));
+        		book.setId_region(rs.getInt("id_region"));
+        		book.setId_publisher(rs.getInt("id_publisher"));
+        		book.setId_category(rs.getInt("id_category"));
+        		book.setId_class(rs.getInt("id_class"));
+        		list.add(book);
+        	}
+        	rs.close();
+        	pst.close();
+        } catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+        conn.close();
+        return list;
+    }
+	
+	public List<Book> getAdminInfo(String temp) throws SQLException {
+		List<Book> list = new ArrayList<Book>();
+        String sql = "select * from book where id = '" + temp + "' or ISBN = '" + temp + "' or name = '" + temp + "' or reference = '" + temp + "' or writer = '" + temp + "'";
         Connection conn = DbUtil.getCon();
         try {
         	PreparedStatement pst = conn.prepareStatement(sql);

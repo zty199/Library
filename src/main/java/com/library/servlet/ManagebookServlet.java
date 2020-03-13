@@ -3,15 +3,18 @@ package com.library.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.library.dao.*;
+import com.library.dao.BookDao;
+import com.library.entity.Book;
 
-public class DeletebookServlet extends HttpServlet {
+public class ManagebookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,18 +26,23 @@ public class DeletebookServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
-        int id = Integer.parseInt(request.getParameter("id"));
+        String content = request.getParameter("content");
         BookDao dao = new BookDao();
+        List<Book> list = new ArrayList<Book>();
         try {
-			if(dao.delBook(id)) {
-				out.print("<script>alert('删除书籍信息成功！'); window.location='../jsp/managebook.jsp'; </script>");
+        	if(content.equals("")) {
+            	list = dao.getAllBook();
+            } else {
+            	list = dao.getAdminInfo(content);
+            }
+			if(list.size() == 0) {
+				out.print("<script>alert('查询不到相关书籍！'); window.location='../jsp/managebook.jsp'</script>");
 				out.flush();
-				out.close();
-				return;
+        		out.close();
+        		return;
 			} else {
-				out.print("<script>alert('删除书籍信息失败，请检查！'); window.location='../jsp/managebook.jsp'; </script>");
-				out.flush();
-				out.close();
+				request.getSession().setAttribute("list", list);
+				response.sendRedirect("../jsp/managebook.jsp");
 				return;
 			}
 		} catch (SQLException e) {

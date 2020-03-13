@@ -21,15 +21,51 @@ User user = (User) session.getAttribute("user");
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
+	<link rel="stylesheet" href="layui/css/layui.css" media="all">
 
   </head>
   
   <body>
-    <a href="jsp/login.jsp">登录</a>
-    <a href="jsp/addbook.jsp">录入图书</a>
-    <a href="jsp/searchbook.jsp">查询图书</a>
+  	<div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">Whatever小组</div>
+            
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item"><a href="jsp/searchbook.jsp">图书查询</a></li>
+                <%
+                if(user != null) {
+                %>
+                <li class="layui-nav-item"><a href="jsp/managebook.jsp">图书管理</a></li>
+                <%
+                }
+                %>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+            	<li class="layui-nav-item">欢迎使用图书查询管理系统！</li>
+            <%
+            if(user == null) {
+            %>
+                <li class="layui-nav-item"><a href="jsp/login.jsp">管理员登录</a></li>
+            <%
+            } else {
+            %>
+            	<li class="layui-nav-item">
+            		<a href="jsp/login.jsp">欢迎您，管理员<%=user.getUsername()%></a>
+            		<dl class="layui-nav-child">
+        				<dd class="layui-this">
+        					<a href="jsp/logout.jsp">退出登录</a>
+        				</dd>
+      				</dl>
+            	</li>
+            <%
+            }
+            %>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="layui/layui.all.js" charset="utf-8"></script>
+    
   </body>
 </html>

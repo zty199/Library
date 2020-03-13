@@ -11,7 +11,7 @@ User user = (User) session.getAttribute("user");
   <head>
     <base href="<%=basePath%>">
 
-    <title>录入图书 - 图书查询管理系统</title>
+    <title>图书录入 - 图书查询管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -25,24 +25,48 @@ User user = (User) session.getAttribute("user");
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
 
   </head>
-
+  <jsp:include page="isLogin.jsp"></jsp:include>
   <body>
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
             <div class="layui-logo">Whatever小组</div>
             
             <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item"><a href="">主页</a></li>
-                <li class="layui-nav-item"><a href="">添加</a></li>
-
+                <li class="layui-nav-item"><a href="jsp/searchbook.jsp">图书查询</a></li>
+                <%
+                if(user != null) {
+                %>
+                <li class="layui-nav-item"><a href="jsp/managebook.jsp">图书管理</a></li>
+                <li class="layui-nav-item"><a href="jsp/addbook.jsp">图书录入</a></li>
+                <%
+                }
+                %>
             </ul>
             <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item"><a href="">退出</a></li>
+            	<li class="layui-nav-item">欢迎使用图书查询管理系统！</li>
+            <%
+            if(user == null) {
+            %>
+                <li class="layui-nav-item"><a href="jsp/login.jsp">管理员登录</a></li>
+            <%
+            } else {
+            %>
+            	<li class="layui-nav-item">
+            		<a href="jsp/admin.jsp">欢迎您，管理员<%=user.getUsername()%></a>
+            		<dl class="layui-nav-child">
+        				<dd class="layui-this">
+        					<a href="jsp/logout.jsp"><i class="layui-icon layui-icon-logout"></i>&nbsp;退出登录</a>
+        				</dd>
+      				</dl>
+            	</li>
+            <%
+            }
+            %>
             </ul>
         </div>
         
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-            <legend>添加书籍</legend>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>图书录入</legend>
         </fieldset>
         
         <form class="layui-form layui-form-pane" action="servlet/AddbookServlet" method="post">
@@ -91,13 +115,15 @@ User user = (User) session.getAttribute("user");
                 </div>
             </div>
 
-            <div class="layui-form-item">
-                <button type="submit" class="layui-btn" lay-submit="">添加</button>
+            <div class="layui-form-item layui-col-md-offset5">
+                <button type="submit" class="layui-btn" lay-submit=""><i class="layui-icon layui-icon-add-1"></i>添加</button>
+                <button type="reset" class="layui-btn layui-btn-warm"><i class="layui-icon layui-icon-refresh"></i>重置</button>
+                <button type="button" class="layui-btn layui-btn-primary" onclick="window.location='/Library/jsp/managebook.jsp';"><i class="layui-icon layui-icon-return"></i>返回</button>
             </div>
         </form>
     </div>
 
-    <script src="layui/layui.js" charset="utf-8"></script>
+    <script src="layui/layui.all.js" charset="utf-8"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/cascadecategory.js" charset="utf-8"></script>
     <script>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.*;
 
-public class LoginServlet extends HttpServlet {
+public class AdminServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,18 +24,26 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
-        User user = new User();
-        user.setUsername(request.getParameter("username"));
-        user.setPassword(request.getParameter("password"));
+        User user = (User) request.getSession().getAttribute("user");
+        String opwd = request.getParameter("opwd");
+        if(!opwd.equals(user.getPassword())) {
+        	out.print("<script>alert('原密码不正确，请重新输入！'); window.location='../jsp/admin.jsp'</script>");
+			out.flush();
+			out.close();
+			return;
+        }
+        user.setPassword(request.getParameter("cpwd"));
         UserDao dao = new UserDao();
         try {
-			if(dao.isValid(user.getUsername(), user.getPassword())) {
-				user = dao.getInfo(user.getUsername());
-				request.getSession().setAttribute("user", user);
-				response.sendRedirect("../jsp/managebook.jsp");
+			if(dao.modifyUser(user)) {
+				out.print("<script>alert('密码修改成功，请重新登录！'); window.location='../jsp/login.jsp'</script>");
+				request.getSession().invalidate();
+				out.flush();
+				out.close();
 				return;
 			} else {
-				out.print("<script>alert('用户名或密码错误！'); window.location='../jsp/login.jsp'</script>");
+				out.print("<script>alert('密码修改失败，请检查！'); window.location='../jsp/login.jsp'</script>");
+				request.getSession().invalidate();
 				out.flush();
 				out.close();
 				return;

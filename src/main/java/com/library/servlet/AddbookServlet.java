@@ -46,13 +46,13 @@ public class AddbookServlet extends HttpServlet {
 				id_publisher = dao2.getInfo(publisher).getId();
 			} else {
 				if(!dao1.isListed(region)) {
-					out.print("<script>alert('没有找到国家地区及出版社信息，录入后请及时修改！'); window.location='../jsp/addbook.jsp'</script>");
+					out.print("<script>alert('没有找到国家地区及出版社信息，录入后请及时修改！'); window.location='../jsp/managebook.jsp'</script>");
 					out.flush();
 					out.close();
 				} else {
 					if(!dao2.isListed(publisher)) {
 						id_region = dao1.getInfo(region).getId();
-						out.print("<script>alert('没有找到出版社信息，录入后请及时修改！'); window.location='../jsp/addbook.jsp'</script>");
+						out.print("<script>alert('没有找到出版社信息，录入后请及时修改！'); window.location='../jsp/managebook.jsp'</script>");
 						out.flush();
 						out.close();
 					}
@@ -77,7 +77,7 @@ public class AddbookServlet extends HttpServlet {
 	        String reference = symbol_category + symbol_class + temp;
 	        book.setReference(reference);
 			if(dao.addBook(book) && dao4.modifyClass(Class)) {
-				out.print("<script>alert('添加书籍成功！'); window.location='../jsp/index.jsp'</script>");
+				out.print("<script>alert('添加书籍成功！'); window.location='../jsp/managebook.jsp'</script>");
 				out.flush();
 				out.close();
 				return;

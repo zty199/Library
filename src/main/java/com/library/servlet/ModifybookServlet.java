@@ -62,7 +62,7 @@ public class ModifybookServlet extends HttpServlet {
 	        	book.setReference(reference);
 	        }
 			if(dao.modifyBook(book) && dao1.modifyClass(Class)) {
-				out.print("<script>alert('更新书籍信息成功！'); window.location='../jsp/index.jsp'</script>");
+				out.print("<script>alert('更新书籍信息成功！'); window.location='../jsp/manage.jsp'</script>");
 				out.flush();
 				out.close();
 				return;
