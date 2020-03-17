@@ -9,6 +9,7 @@ import com.library.entity.*;
 
 public class UserDao {
 
+	//根据用户名获取用户信息
 	public User getInfo(String username) throws SQLException {
         String sql = "select * from user where username = '" + username + "'";
         Connection conn = DbUtil.getCon();
@@ -30,6 +31,7 @@ public class UserDao {
         return user;
     }
 
+	//判断用户名密码是否匹配
 	public boolean isValid(String username, String password) throws SQLException {
 		String sql = "select * from user where username = '" + username + "'";
 		Connection conn = DbUtil.getCon();
@@ -54,6 +56,7 @@ public class UserDao {
     		return false;
 	}
 	
+	//修改用户密码
 	public boolean modifyUser(User user) throws SQLException {
     	String sql = "update user set password = ? where id = ?";
     	Connection conn = DbUtil.getCon();

@@ -12,6 +12,7 @@ import com.library.entity.*;
 
 public class BookDao {
 
+	//获取全部图书列表
 	public List<Book> getAllBook() throws SQLException {
         List<Book> list = new ArrayList<Book>();
         String sql = "select * from book";
@@ -43,6 +44,7 @@ public class BookDao {
         return list;
     }
 	
+	//根据搜索信息返回相关图书
 	public List<Book> getInfo(String temp) throws SQLException {
 		List<Book> list = new ArrayList<Book>();
         String sql = "select * from book where ISBN = '" + temp + "' or name = '" + temp + "' or reference = '" + temp + "' or writer = '" + temp + "'";
@@ -73,6 +75,7 @@ public class BookDao {
         return list;
     }
 	
+	//根据搜索信息返回相关图书（包括图书ID）
 	public List<Book> getAdminInfo(String temp) throws SQLException {
 		List<Book> list = new ArrayList<Book>();
         String sql = "select * from book where id = '" + temp + "' or ISBN = '" + temp + "' or name = '" + temp + "' or reference = '" + temp + "' or writer = '" + temp + "'";
@@ -103,6 +106,7 @@ public class BookDao {
         return list;
     }
 	
+	//根据图书ID获取指定图书信息
 	public Book getInfo(int id) throws SQLException {
         String sql = "select * from book where id = " + id;
         Connection conn = DbUtil.getCon();
@@ -131,6 +135,7 @@ public class BookDao {
         return book;
     }
 	
+	//判断录入图书是否已在列表
 	public boolean isListed(String isbn) throws SQLException {
         String sql = "select * from book where ISBN = '" + isbn +"'";
         Connection conn = DbUtil.getCon();
@@ -163,6 +168,7 @@ public class BookDao {
     	}
     }
 	
+	//添加图书
 	public boolean addBook(Book book) throws SQLException {
 	    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     	String sql = "insert into book(ISBN, reference, name, writer, date, id_region, id_publisher, id_category, id_class) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -189,6 +195,7 @@ public class BookDao {
     	}
     }
 	
+	//修改图书信息
 	public boolean modifyBook(Book book) throws SQLException {
     	String sql = "update book set ISBN = ?, reference = ?, name = ?, writer = ?, id_region = ?, id_publisher = ?, id_category = ?, id_class = ? where id = ?";
     	Connection conn = DbUtil.getCon();
@@ -214,6 +221,7 @@ public class BookDao {
     	}
     }
 	
+	//删除图书
 	public boolean delBook(int id) throws SQLException {
     	String sql = "delete from book where id = '" + id + "'";
     	Connection conn = DbUtil.getCon();

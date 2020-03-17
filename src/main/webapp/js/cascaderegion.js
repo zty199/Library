@@ -18,7 +18,7 @@ layui.use('form', function() {
     form.on('select(region)', function(data) {
         var id = data.value;
         if (id == 0) {
-        	//根据返回的字符串为新创建的select节点添加option节点
+        	//根据返回的字符串为指定的select节点添加option节点
         	$('#publisher').html('<option value="" selected="">请选择出版社</option>');
         	//刷新Layui-form渲染
         	form.render();
@@ -39,7 +39,7 @@ layui.use('form', function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     //得到完成请求后返回的字串符
                     var str = xhr.responseText;
-                    //根据返回的字符串为新创建的select节点添加option节点
+                    //根据返回的字符串为指定的select节点添加option节点
                     $('#publisher').html('<option value="" selected="">请选择出版社</option>');
                     var arr1 = str.split(",");
                     for (var i = 0; i < arr1.length; i++) {

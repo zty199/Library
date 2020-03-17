@@ -11,6 +11,7 @@ import com.library.entity.Class;
 
 public class ClassDao {
 
+	//获取全部小类列表
 	public List<Class> getAllClass(int id) throws SQLException {
         List<Class> list = new ArrayList<Class>();
         String sql = "select * from class where id_category = " + id;
@@ -37,6 +38,7 @@ public class ClassDao {
         return list;
     }
 	
+	//根据小类ID获取小类信息
 	public Class getInfo(int id) throws SQLException {
         String sql = "select * from class where id = " + id;
         Connection conn = DbUtil.getCon();
@@ -79,6 +81,7 @@ public class ClassDao {
     	}
     }*/
 	
+	//录入图书后更新小类信息（图书数量）
 	public boolean modifyClass(Class Class) throws SQLException {
     	String sql = "update Class set name = ?, symbol = ?, id_category = ?, count = ? where id = ?";
     	Connection conn = DbUtil.getCon();

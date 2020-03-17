@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.*;
 
+//图书查询界面搜索
 public class SearchbookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

@@ -11,6 +11,7 @@ import com.library.entity.*;
 
 public class PublisherDao {
 
+	//根据国家地区ID获取对应竖版社列表
 	public List<Publisher> getAllPublisher(int id) throws SQLException {
         List<Publisher> list = new ArrayList<Publisher>();
         String sql = "select * from publisher where id_region = " + id;
@@ -36,6 +37,7 @@ public class PublisherDao {
         return list;
     }
 	
+	//根据出版社ID获取出版社信息
 	public Publisher getInfo(int id) throws SQLException {
         String sql = "select * from publisher where id = " + id;
         Connection conn = DbUtil.getCon();
@@ -58,6 +60,7 @@ public class PublisherDao {
         return publisher;
     }
 	
+	//根据出版社索引号获取出版社信息
 	public Publisher getInfo(String reference) throws SQLException {
         String sql = "select * from publisher where reference = '"  + reference + "'";
         Connection conn = DbUtil.getCon();
@@ -80,6 +83,7 @@ public class PublisherDao {
         return publisher;
     }
 	
+	//判断出版社是否已经存在
 	public boolean isListed(String reference) throws SQLException {
         String sql = "select * from publisher where reference = '" + reference + "'";
         Connection conn = DbUtil.getCon();

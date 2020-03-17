@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.Class;
 
+//处理前端大类和小类之间的级联显示
 public class CascadeCategoryServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

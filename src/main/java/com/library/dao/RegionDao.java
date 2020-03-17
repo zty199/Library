@@ -11,6 +11,7 @@ import com.library.entity.*;
 
 public class RegionDao {
 
+	//获取全部国家地区列表
 	public List<Region> getAllRegion() throws SQLException {
         List<Region> list = new ArrayList<Region>();
         String sql = "select * from region";
@@ -36,6 +37,7 @@ public class RegionDao {
         return list;
     }
 	
+	//根据国家地区ID获取信息
 	public Region getInfo(int id) throws SQLException {
         String sql = "select * from region where id = " + id;
         Connection conn = DbUtil.getCon();
@@ -58,6 +60,7 @@ public class RegionDao {
         return region;
     }
 	
+	//根据国家地区索引号获取信息
 	public Region getInfo(String reference) throws SQLException {
         String sql = "select * from region where reference = '" + reference + "'";
         Connection conn = DbUtil.getCon();
@@ -80,6 +83,7 @@ public class RegionDao {
         return region;
     }
 	
+	//判断国家地区是否已经存在
 	public boolean isListed(String reference) throws SQLException {
         String sql = "select * from region where reference = '" + reference + "'";
         Connection conn = DbUtil.getCon();

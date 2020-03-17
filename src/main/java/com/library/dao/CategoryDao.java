@@ -11,6 +11,7 @@ import com.library.entity.*;
 
 public class CategoryDao {
 
+	//获取全部大类列表
 	public List<Category> getAllCategory() throws SQLException {
         List<Category> list = new ArrayList<Category>();
         String sql = "select * from category";
@@ -35,6 +36,7 @@ public class CategoryDao {
         return list;
     }
 	
+	//根据大类ID获取大类信息
 	public Category getInfo(int id) throws SQLException {
         String sql = "select * from category where id = " + id;
         Connection conn = DbUtil.getCon();

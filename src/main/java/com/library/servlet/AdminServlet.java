@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.*;
 
+//修改用户密码
 public class AdminServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -24,8 +25,10 @@ public class AdminServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
+        //获取当前用户登录信息
         User user = (User) request.getSession().getAttribute("user");
         String opwd = request.getParameter("opwd");
+        //判断原密码是否输入正确
         if(!opwd.equals(user.getPassword())) {
         	out.print("<script>alert('原密码不正确，请重新输入！'); window.location='../jsp/admin.jsp'</script>");
 			out.flush();

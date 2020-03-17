@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.*;
 import com.library.entity.*;
 
+//处理前端国家地区和出版社之间的级联显示
 public class CascadeRegionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

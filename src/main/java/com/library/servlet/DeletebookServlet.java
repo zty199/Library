@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.library.dao.*;
 
+//删除图书
 public class DeletebookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

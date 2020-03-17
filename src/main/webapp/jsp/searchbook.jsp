@@ -178,7 +178,7 @@ User user = (User) session.getAttribute("user");
                 }
             });
 
-            //鼠标悬停提示特效
+            //鼠标悬停提示特效（提示ISBN输入格式）
             $("#content").hover(function () {
                 layer.tips('注意ISBN格式，例如：978-7-02-000001-1', '#content', {
                     tips: [3, '#5FB878'],

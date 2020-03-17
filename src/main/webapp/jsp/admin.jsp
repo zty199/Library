@@ -128,6 +128,7 @@ User user = (User) session.getAttribute("user");
                     if (value.length == 0) {
                         return '请确认密码！';
                     } else {
+                    	//检验两次密码输入是否一致
                         if (pwd != cpwd) {
                             return '两次输入的密码不一致！';
                         }

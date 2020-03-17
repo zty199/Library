@@ -14,6 +14,7 @@ import com.library.entity.*;
 import com.library.entity.Class;
 import com.library.interpreter.*;
 
+//添加书籍
 public class AddbookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -26,6 +27,7 @@ public class AddbookServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
+        //使用解释器解析ISBN中的信息
         String isbn = request.getParameter("isbn");
         String region = new Information().getRegion(isbn).interpret();
         String publisher = new Information().getPublisher(isbn).interpret();
@@ -66,6 +68,7 @@ public class AddbookServlet extends HttpServlet {
 	        book.setId_class(Integer.parseInt(request.getParameter("class")));
 	        book.setId_region(id_region);
 	        book.setId_publisher(id_publisher);
+	        //更新对应小类图书数量信息
 	        CategoryDao dao3 = new CategoryDao();
 	        String symbol_category = dao3.getInfo(book.getId_category()).getSymbol();
 	        ClassDao dao4 = new ClassDao();
@@ -74,6 +77,7 @@ public class AddbookServlet extends HttpServlet {
 	        Class.setCount(Class.getCount() + 1);
 	        int count = Class.getCount();
 	        String temp = String.format("%04d", count);
+	        //根据现有图书数量生成唯一的索书号
 	        String reference = symbol_category + symbol_class + temp;
 	        book.setReference(reference);
 			if(dao.addBook(book) && dao4.modifyClass(Class)) {

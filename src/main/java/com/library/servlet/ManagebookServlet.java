@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.library.dao.BookDao;
 import com.library.entity.Book;
 
+//图书管理界面搜索
 public class ManagebookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

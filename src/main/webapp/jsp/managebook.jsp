@@ -191,6 +191,7 @@ User user = (User) session.getAttribute("user");
             });
         });
 
+        //根据选择删除的图书将ID传到后台
         function judge(id) {
             if (confirm("确认删除这本书？")) {
                 window.location = '/Library/servlet/DeletebookServlet?id=' + id;

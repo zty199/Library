@@ -13,6 +13,7 @@ import com.library.dao.*;
 import com.library.entity.*;
 import com.library.entity.Class;
 
+//图书信息修改
 public class ModifybookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -46,6 +47,7 @@ public class ModifybookServlet extends HttpServlet {
 	        book.setId_class(Integer.parseInt(request.getParameter("class")));
 	        book.setId_region(Integer.parseInt(request.getParameter("region")));
 	        book.setId_publisher(Integer.parseInt(request.getParameter("publisher")));
+	        //更新小类图书数量信息
 	        ClassDao dao1 = new ClassDao();
         	Class Class = dao1.getInfo(dao.getInfo(id).getId_class());
 	        if(dao.getInfo(id).getId_category() == book.getId_category() && dao.getInfo(id).getId_class() == book.getId_class()) {
@@ -58,6 +60,7 @@ public class ModifybookServlet extends HttpServlet {
 	        	Class.setCount(Class.getCount() + 1);
 	        	int count = Class.getCount();
 	        	String temp = String.format("%04d", count);
+	        	//更新索书号
 	        	String reference = symbol_category + symbol_class + temp;
 	        	book.setReference(reference);
 	        }
