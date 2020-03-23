@@ -108,9 +108,7 @@ Book book = dao.getInfo(id);
                         <%
                         } else {
                         %>
-                            <option value="<%=book.getId_region()%>" selected="">
-                                <%=dao1.getInfo(book.getId_region()).getName() + " / " + dao1.getInfo(book.getId_region()).getReference()%>
-                            </option>
+                            <option value="<%=book.getId_region()%>" selected=""><%=dao1.getInfo(book.getId_region()).getName() + " / " + dao1.getInfo(book.getId_region()).getReference()%></option>
                         <%
                         }
           				List<Region> list = dao1.getAllRegion();
@@ -137,9 +135,7 @@ Book book = dao.getInfo(id);
                         <%
                         } else {
                         %>
-                            <option value="<%=book.getId_publisher()%>" selected="">
-                                <%=dao2.getInfo(book.getId_publisher()).getName() + " / " + dao2.getInfo(book.getId_publisher()).getReference()%>
-                            </option>
+                            <option value="<%=book.getId_publisher()%>" selected=""><%=dao2.getInfo(book.getId_publisher()).getName() + " / " + dao2.getInfo(book.getId_publisher()).getReference()%></option>
                         <%
                         }
                         %>
@@ -154,9 +150,7 @@ Book book = dao.getInfo(id);
                         <%
                         CategoryDao dao3 = new CategoryDao();
                         %>
-                            <option value="<%=book.getId_category()%>" selected="">
-                                <%=dao3.getInfo(book.getId_category()).getName()%>
-                            </option>
+                            <option value="<%=book.getId_category()%>" selected=""><%=dao3.getInfo(book.getId_category()).getName()%></option>
                         <%
           				List<Category> list1 = dao3.getAllCategory();
           				for(int i = 0; i < list1.size(); i++) {
@@ -173,9 +167,7 @@ Book book = dao.getInfo(id);
                         <%
                         ClassDao dao4 = new ClassDao();
                         %>
-                            <option value="<%=book.getId_class()%>" selected="">
-                                <%=dao4.getInfo(book.getId_class()).getName()%>
-                            </option>
+                            <option value="<%=book.getId_class()%>" selected=""><%=dao4.getInfo(book.getId_class()).getName()%></option>
                         </select>
                     </div>
                 </div>
