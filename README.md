@@ -67,9 +67,9 @@
     
       create database library;
     
-      use datebase library;
+      use database library;
     
-      source ..../library.sql;  （csp.sql文件的完整路径）
+      source ..../library.sql;  （library.sql文件的完整路径）
     
   2)  将项目导入Eclipse for JavaEE中，配置服务器环境和jdk环境
   
